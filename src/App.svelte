@@ -4,19 +4,34 @@
 	//Reactive Variables
 
 	$: UppercaseName = name.toUpperCase();
-	// $: console.log(dimension);
+	$: console.log(name);
 
 	//Logical Reactive Variable
 	$: name === "Blino" ? (dimension = 23) : incrementDimension;
 
 	//Arrow function that will change the prop value
 	const changeName = () => {
-		name = "Blino";
+		name = "Drian";
+	};
+
+	const decrementDimension = () => {
+		dimension -= 1;
 	};
 
 	//Arrow function that will change the prop value
 	const incrementDimension = () => {
 		dimension += 1;
+	};
+
+	const nameInput = (event) => {
+		let enteredValue = event.target.value;
+		name = enteredValue;
+	};
+
+	const dimensionInput = (event) => {
+		let enteredValue = event.target.value;
+		dimension = enteredValue;
+		console.log(dimension);
 	};
 </script>
 
@@ -26,8 +41,21 @@
 	</div>
 	<div class="main-container__button">
 		<!-- on:click and inside curlybraces we write the function name that we want to be executed when we click on the button -->
-		<button on:click={changeName}> Change Name</button>
+		<!-- <button on:click={changeName}> Change Name</button> -->
 		<button on:click={incrementDimension}>Increment Dimension</button>
+		<button on:click={decrementDimension}>Decrement Dimension</button>
+		<input
+			type="text"
+			value={name}
+			class="main__input"
+			on:input={nameInput}
+		/>
+		<input
+			type="text"
+			class="main__input"
+			value={dimension}
+			on:input={dimensionInput}
+		/>
 	</div>
 </div>
 
@@ -88,5 +116,13 @@
 		color: #fff;
 
 		font-family: "Poppins", serif;
+	}
+
+	.main__input {
+		border: 1px solid black;
+		padding: 10px;
+	}
+	.main__input:focus {
+		outline: none;
 	}
 </style>
